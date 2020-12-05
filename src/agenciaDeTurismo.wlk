@@ -3,6 +3,8 @@ import usuarios.*
 import transportes.*
 import viajes.*
 
+//hola 
+
 object barrileteCosmico {
 	const destinos = #{goodAirs, lastToninas, silversSea, garlicsSea}
 	const transportesDisponibles = [avion,tren,micro,barco]
