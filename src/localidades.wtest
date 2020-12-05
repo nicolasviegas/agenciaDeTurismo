@@ -37,40 +37,53 @@ describe "Test con 2 localidades aleatorias" {
 }
 
 describe "Tests con montañas" {
-    test "Peligrosa si mide mas de 5000mts" {
-        const montania = new Montania(
-            altura = 5001,
-            equipajeImprescindible = ["Vacuna"],
-            precio = 0,
-            nombre = "montaña",
-            kilometro = 103
-        )
-        
-        assert.that(montania.esPeligrosa())
-    }
-    
-    test "Peligrosa si no requiere vacuna" {
-        const montania = new Montania(
-            altura = 1,
-            equipajeImprescindible = [],
-            precio = 0,
-            nombre = "montaña",
-            kilometro = 103
-        )
-        
-        assert.that(montania.esPeligrosa())
-    }
-    
-    test "No eseligrosa si requiere vacuna y mide menos de 5000mts" {
-        const montania = new Montania(
-            altura = 4999,
-            equipajeImprescindible = ["Vacuna"],
-            precio = 0,
-            nombre = "montaña",
-            kilometro = 103
-        )
-        
-        assert.notThat(montania.esPeligrosa())
-    }
+	test "Peligrosa si mide mas de 5000mts" {
+		const montania = new Montania(
+			altura = 5001,
+		    equipajeImprescindible = ["Vacuna"],
+		    precio = 0,
+		    nombre = "montaña",
+		    kilometro = 103
+		)
+		
+		assert.that(montania.esPeligrosa())
+	}
+	
+	test "Peligrosa si no requiere vacuna" {
+		const montania = new Montania(
+			altura = 1,
+		    equipajeImprescindible = [],
+		    precio = 0,
+		    nombre = "montaña",
+		    kilometro = 103
+		)
+		
+		assert.that(montania.esPeligrosa())
+	}
+	
+	test "No eseligrosa si requiere vacuna y mide menos de 5000mts" {
+		const montania = new Montania(
+			altura = 4999,
+		    equipajeImprescindible = ["Vacuna"],
+		    precio = 0,
+		    nombre = "montaña",
+		    kilometro = 103
+		)
+		
+		assert.notThat(montania.esPeligrosa())
+	}
 }
 
+describe "Es destino importante" {
+	test "Una ciudad historica con 3 museos y con un precio mayor a 2000 es un destino importante" {
+		const ciudad = new CiudadHistorica(
+			cantDeMuseos = 3,
+			equipajeImprescindible = [],
+			precio = 2001,
+			nombre = "ciudad",
+		    kilometro = 102
+		)
+		
+		assert.that(ciudad.esDestinoImportante())
+	}
+}

@@ -44,18 +44,17 @@ class Barco inherits Transporte {
 }
 
 const avion = new Avion(
-    velocidad=500,
-    impulsoDeTurbinas=200,
-    cantTurbinas=2
+	velocidad=500,
+	impulsoDeTurbinas=200,
+	cantTurbinas=2
 )
 const micro = new Micro(
-    velocidad=120
+	velocidad=120
 )
 const tren = new Tren(
-    velocidad=250
+	velocidad=250
 )
 const barco = new Barco(
-    velocidad=300,
-    probabilidadDeChocar=20
+	velocidad=300,
+	probabilidadDeChocar=20
 )
-

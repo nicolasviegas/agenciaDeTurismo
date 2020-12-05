@@ -1,5 +1,4 @@
 import localidades.*
-import clasePerfil.*
 
 class Usuario {
 	const usrName
@@ -7,7 +6,7 @@ class Usuario {
 	var dinero
 	var seguidos
 	var localidadDeOrigen
-
+	
 	method viajes() {
 		return viajes
 	}
@@ -19,7 +18,6 @@ class Usuario {
 	method dinero(valor) {
 		dinero = valor
 	}
-	
 	
 	method localidadDeOrigen() {
 		return localidadDeOrigen
@@ -42,9 +40,28 @@ class Usuario {
 		}
 	}
 	
-	method seleccionDeTransporte(transportesDisponibles)
+	method seleccionDeTransporte(trasnportesDisponibles)
+	
 }
 
+class PerfilEmpresarial inherits Usuario {
+	override method seleccionDeTransporte(trasnportesDisponibles) {
+		return trasnportesDisponibles.max({transporte => transporte.velocidad()})
+	}
+}
+
+class PerfilEstudiantil inherits Usuario {
+	override method seleccionDeTransporte(trasnportesDisponibles) {
+		const losQuePuedePAgar = trasnportesDisponibles.filter({transporte => transporte.valorDelKilometro() <= dinero})
+		return losQuePuedePAgar.max({transporte => transporte.velocidad()})
+	}
+}
+
+class PerfilGrupoFamiliar inherits Usuario {
+	override method seleccionDeTransporte(trasnportesDisponibles) {
+		return trasnportesDisponibles.anyOne()
+	}
+}
 
 const pabloHari = new PerfilEstudiantil(
 	usrName = "PHari",

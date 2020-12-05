@@ -1,7 +1,6 @@
 import usuarios.*
 import localidades.*
 import agenciaDeTurismo.*
-import clasePerfil.*
 
 describe "Test con Pablo Hari"{	
 	test "Obtener las millas de PHari" {
@@ -31,22 +30,22 @@ describe "Test con Pablo Hari viajando a Silver's Sea con $5000"{
 		assert.equals(dineroInicial-viaje.precio(), pabloHari.dinero())
 	}
 }
- 
+
 describe "Test conPerfil empresarial"{
-    const empresario
-    
-    fixture {
-        empresario = new PerfilEmpresarial(usrName = "Sr. Empresario",
-            viajes = [],
-            dinero = 1500,
-            seguidos = [],
-            localidadDeOrigen = garlicsSea
-        )
-    }
-    
-    test "Selecciona el transporte mas rápido"{
-        const viaje = barrileteCosmico.armarUnViaje(empresario, silversSea)
-        const transporteMasRapido = barrileteCosmico.transportesDisponibles().max({transporte => transporte.velocidad()})
-        assert.equals(transporteMasRapido,viaje.medioDeTransporte())
-    }
+	const empresario
+	
+	fixture {
+		empresario = new PerfilEmpresarial(usrName = "Sr. Empresario",
+			viajes = [],
+			dinero = 1500,
+			seguidos = [],
+			localidadDeOrigen = garlicsSea
+		)
+	}
+	
+	test "Selecciona el transporte mas rápido"{
+		const viaje = barrileteCosmico.armarUnViaje(empresario, silversSea)
+		const transporteMasRapido = barrileteCosmico.transportesDisponibles().max({transporte => transporte.velocidad()})
+		assert.equals(transporteMasRapido,viaje.medioDeTransporte())
+	}
 }

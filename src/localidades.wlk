@@ -29,6 +29,13 @@ class Localidad {
 		equipajeImprescindible.add(elemento)
 	}
 	
+	method requiere(algo) {
+		return equipajeImprescindible.any({elemento => elemento.contains(algo)})
+	}
+	
+	method requiereVacuna() {
+		return self.requiere("Vacuna")
+	}
 	
 	method distanciaA(localidad) {		
 		return (kilometro - localidad.kilometro()).abs()
@@ -38,21 +45,11 @@ class Localidad {
 		return precio > 2000
 	}
 	
-	method requiere(algo) {
-        return equipajeImprescindible.any({elemento => elemento.contains(algo)})
-    }
-    
-    method requiereVacuna() {
-        return self.requiere("Vacuna")
-    } 
-    
-    method requiereAsistenciaAlViajero(){
-    	return self.requiere("Asistencia al viajero")
-    }
+	method esPeligrosa()
 }
 
 class Playa inherits Localidad {
-	method esPeligrosa() {
+	override method esPeligrosa() {
 		return false
 	}
 }
@@ -60,9 +57,8 @@ class Playa inherits Localidad {
 class Montania inherits Localidad {
 	const altura
 	
-	method esPeligrosa() {
-		return altura > 5000  && self.requiereVacuna() // && usuario tiene vacuna
-		
+	override method esPeligrosa() {
+		return altura > 5000 || !self.requiereVacuna()
 	}
 	
 	override method esDestinoImportante() {
@@ -73,9 +69,8 @@ class Montania inherits Localidad {
 class CiudadHistorica inherits Localidad {
 	var cantDeMuseos
 	
-	method esPeligrosa() {
-		self.requiereAsistenciaAlViajero()
-		return false //mientras tenga asistencia al viajero
+	override method esPeligrosa() {
+		return !self.requiere("Asistencia al viajero")
 	}
 	
 	override method esDestinoImportante() {
@@ -98,7 +93,7 @@ const silversSea = new Playa(
 )
 
 const lastToninas = new CiudadHistorica(
-    cantDeMuseos = 3,
+	cantDeMuseos = 3,
     equipajeImprescindible = ["Vacuna Gripal", "Vacuna B", "Necronomicon"],
     precio = 3500,
     nombre = "Last Toninas",
@@ -106,7 +101,7 @@ const lastToninas = new CiudadHistorica(
 )
 
 const goodAirs = new Montania(
-    altura = 2500,
+	altura = 2500,
     equipajeImprescindible = ["Cerveza", "Protector Solar"],
     precio = 1500,
     nombre = "Good Airs",

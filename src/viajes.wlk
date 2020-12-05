@@ -11,6 +11,10 @@ class Viaje{
 		medioDeTranporte = medio
 	}
 	
+	method medioDeTransporte() {
+		return medioDeTranporte
+	}
+	
 	method precio() {
 		return medioDeTranporte.valorViaje(self.kilometros()) + destino.precio()
 	}

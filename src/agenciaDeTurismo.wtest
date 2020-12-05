@@ -4,12 +4,10 @@ import localidades.*
 describe "Contexto de barrileteCosmico" {
 	
 	test "Obtener los destinos más importantes de Barrilete Cósmico" {
-		//assert.that(barrileteCosmico.destinosImportantes() == #{garlicsSea, lastToninas})
-		assert.equals(#{garlicsSea, lastToninas}, barrileteCosmico.destinos().filter({destino => destino.esDestinosImportante()}))
+		assert.equals(#{garlicsSea, lastToninas}, barrileteCosmico.destinos().filter({destino => destino.esDestinoImportante()}))
 	}
 	
 	test "Destino mas peligroso hasta el momento" {
-		//assert.that(barrileteCosmico.destinos().filter({destino => destino.requiereVacuna()}) == #{lastToninas})
 		assert.equals(#{lastToninas}, barrileteCosmico.destinos().filter({destino => destino.requiereVacuna()}))
 	}
 
@@ -18,7 +16,6 @@ describe "Contexto de barrileteCosmico" {
 	}
 
 	test "Conocer la carta de destinos de Barrilete Cósmico"{
-		//assert.that(barrileteCosmico.cartaDeDestinos() == #{"Garlic's Sea", "Good Airs", "Last Toninas", "Silver's Sea"})
 		assert.equals(#{"Garlic's Sea", "Good Airs", "Last Toninas", "Silver's Sea"}, barrileteCosmico.cartaDeDestinos())
 	}
 
