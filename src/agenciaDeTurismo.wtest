@@ -1,0 +1,53 @@
+import agenciaDeTurismo.*
+import localidades.*
+
+describe "Contexto de barrileteCosmico" {
+	
+	test "Obtener los destinos más importantes de Barrilete Cósmico" {
+		//assert.that(barrileteCosmico.destinosImportantes() == #{garlicsSea, lastToninas})
+		assert.equals(#{garlicsSea, lastToninas}, barrileteCosmico.destinos().filter({destino => destino.esDestinosImportante()}))
+	}
+	
+	test "Destino mas peligroso hasta el momento" {
+		//assert.that(barrileteCosmico.destinos().filter({destino => destino.requiereVacuna()}) == #{lastToninas})
+		assert.equals(#{lastToninas}, barrileteCosmico.destinos().filter({destino => destino.requiereVacuna()}))
+	}
+
+	test "Saber si Barrilete Cósmico es una empresa extrema"{
+		assert.that(barrileteCosmico.esEmpresaExtrema())
+	}
+
+	test "Conocer la carta de destinos de Barrilete Cósmico"{
+		//assert.that(barrileteCosmico.cartaDeDestinos() == #{"Garlic's Sea", "Good Airs", "Last Toninas", "Silver's Sea"})
+		assert.equals(#{"Garlic's Sea", "Good Airs", "Last Toninas", "Silver's Sea"}, barrileteCosmico.cartaDeDestinos())
+	}
+
+}
+
+
+describe "Contexto aplicando 15% de descuento a todos los destinos"{
+	fixture{
+		barrileteCosmico.aplicarDescuentos(15)
+	}
+
+	test "Garlic´s sea: $2125" {
+		//assert.that(garlicsSea.precio() == 2125)
+		assert.equals(2125, garlicsSea.precio())
+	}
+	test "Silver's Sea: $1147.5" {
+		//assert.that(silversSea.precio() == 1147.5)
+		assert.equals(1147.5, silversSea.precio())
+	}
+	test "Last Toninas: $2975" {
+		//assert.that(lastToninas.precio() == 2975)
+		assert.equals(2975, lastToninas.precio())
+	}
+	test "Good Airs: $1275" {
+		//assert.that(goodAirs.precio() == 1275)
+		assert.equals(1275, goodAirs.precio())
+	}
+
+	test "Todos deben poseer el certificado de descuento" {
+		assert.that(barrileteCosmico.destinos().all({destino => destino.equipajeImprescindible().contains("Certificado de descuento")}))
+	}
+}

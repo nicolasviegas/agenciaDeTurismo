@@ -1,0 +1,52 @@
+import usuarios.*
+import localidades.*
+import agenciaDeTurismo.*
+import clasePerfil.*
+
+describe "Test con Pablo Hari"{	
+	test "Obtener las millas de PHari" {
+		const millasActuales = pabloHari.viajes().sum({lugar => pabloHari.localidadDeOrigen().distanciaA(lugar)})
+		assert.equals(millasActuales, pabloHari.kilometrosDelUsuario())
+	}
+}
+
+describe "Test con Pablo Hari viajando a Silver's Sea con $5000"{
+	const dineroInicial = 5000
+	const localidadInicial = pabloHari.localidadDeOrigen()
+	var viaje
+	
+	fixture {
+		pabloHari.dinero(dineroInicial)
+		viaje = barrileteCosmico.armarUnViaje(pabloHari, silversSea)
+		pabloHari.viajar(viaje)
+	}
+	
+	test "PHari puede volar, y Silver's Sea es agregado en su historial"{
+		assert.that(pabloHari.viajes().contains(viaje))
+	}
+
+	test "Dinero de PHari despues de volar a Silver's es acorde al precio"{
+		const distancia = silversSea.distanciaA(localidadInicial)
+
+		assert.equals(dineroInicial-viaje.precio(), pabloHari.dinero())
+	}
+}
+ 
+describe "Test conPerfil empresarial"{
+    const empresario
+    
+    fixture {
+        empresario = new PerfilEmpresarial(usrName = "Sr. Empresario",
+            viajes = [],
+            dinero = 1500,
+            seguidos = [],
+            localidadDeOrigen = garlicsSea
+        )
+    }
+    
+    test "Selecciona el transporte mas rápido"{
+        const viaje = barrileteCosmico.armarUnViaje(empresario, silversSea)
+        const transporteMasRapido = barrileteCosmico.transportesDisponibles().max({transporte => transporte.velocidad()})
+        assert.equals(transporteMasRapido,viaje.medioDeTransporte())
+    }
+}

@@ -1,0 +1,38 @@
+import localidades.*
+
+describe "contexto Al Aplicarle 25% de descuento a Last Toninas" {
+	
+	fixture {
+		lastToninas.aplicarDescuento(25)
+	}
+	
+	test "El precio de Last Toninas es de $2625" {
+		//assert.that(lastToninas.precio() == 2625)
+		assert.equals(2625, lastToninas.precio())
+	}
+
+	test "Last Toninas tiene al certificado de descuento como parte de su equipaje imprescindible" {
+		assert.that(lastToninas.equipajeImprescindible().contains("Certificado de descuento"))
+	}
+
+}
+
+describe "Test con Silver's Sea"{
+	test "Averiguar si Silver's Sea es un destino peligroso" {
+    	assert.notThat(silversSea.requiereVacuna())
+	}
+}
+
+describe "Es destino importante" {
+    test "Una ciudad historica con 3 museos y con un precio mayor a 2000 es un destino importante" {
+        const ciudad = new CiudadHistorica(
+            cantDeMuseos = 3,
+            equipajeImprescindible = [],
+            precio = 2001,
+            nombre = "ciudad",
+            kilometro = 102
+        )
+        
+        assert.that(ciudad.esDestinoImportante())
+    }
+}
